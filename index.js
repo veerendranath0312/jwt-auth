@@ -1,8 +1,12 @@
 require('dotenv').config()
+const cors = require('cors')
 const express = require('express')
 const connectDB = require('./db.js')
 
 const app = express()
+
+app.use(cors())
+app.use(express.json()) // parse incoming JSON payload
 
 const start = async () => {
   try {
@@ -14,3 +18,5 @@ const start = async () => {
     console.log('Error: ', error.message)
   }
 }
+
+start()
