@@ -3,7 +3,8 @@ const cors = require('cors')
 const express = require('express')
 const connectDB = require('./db.js')
 const authRouter = require('./routes/auth.router.js')
-const middleware = require('./utils/middleware.js')
+const userRouter = require('./routes/user.router.js')
+const auth = require('./utils/auth.js')
 
 const app = express()
 
@@ -11,8 +12,7 @@ app.use(cors())
 app.use(express.json()) // parse incoming JSON payload
 
 app.use('/api/auth', authRouter)
-
-app.use(middleware.errorHandler)
+app.use('/api/users', auth, userRouter)
 
 const start = async () => {
   try {
